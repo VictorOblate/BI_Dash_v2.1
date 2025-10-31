@@ -27,11 +27,44 @@ class Settings(BaseSettings):
     # API
     API_HOST: str = "0.0.0.0"
     API_PORT: int = 8000
-    CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:3001"]
+    # Store raw value as string so pydantic doesn't attempt to parse non-JSON
+    # env values like "http://a,http://b". Use the `cors_origins` property to
+    # access the parsed list.
+    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:3001"
+
+    @property
+    def cors_origins(self) -> List[str]:
+        """Return CORS origins as a list.
+
+        Supports either a JSON list in the environment (e.g. '["https://a","https://b"]')
+        or a comma-separated string (e.g. 'https://a,https://b').
+        """
+        raw = os.getenv("CORS_ORIGINS", self.CORS_ORIGINS)
+        if not raw:
+            return []
+
+        # Try JSON first
+        try:
+            import json
+
+            parsed = json.loads(raw)
+            if isinstance(parsed, (list, tuple)):
+                return [str(x).strip() for x in parsed if str(x).strip()]
+        except Exception:
+            pass
+
+        # Fallback to comma-separated parsing
+        return [x.strip() for x in raw.split(",") if x.strip()]
     
     # File Upload
     MAX_UPLOAD_SIZE: int = 52428800  # 50MB
-    ALLOWED_EXTENSIONS: List[str] = ["xlsx", "xls", "csv"]
+    # Keep as comma-separated string in env; use `allowed_extensions` to get list
+    ALLOWED_EXTENSIONS: str = "xlsx,xls,csv"
+    
+    @property
+    def allowed_extensions(self) -> List[str]:
+        raw = os.getenv("ALLOWED_EXTENSIONS", self.ALLOWED_EXTENSIONS)
+        return [x.strip().lower() for x in raw.split(",") if x.strip()]
     UPLOAD_DIR: str = "./uploads"
     
     # JWT

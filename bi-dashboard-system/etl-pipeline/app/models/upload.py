@@ -23,7 +23,7 @@ class UploadHistory(Base):
     records_success = Column(Integer, default=0, nullable=True)
     records_failed = Column(Integer, default=0, nullable=True)
     error_log = Column(Text, nullable=True)
-    metadata = Column(Text, nullable=True)  # JSON string with additional info
+    metadata_json = Column("metadata", Text, nullable=True)  # JSON string with additional info
     transaction_id = Column(String(100), nullable=True, index=True)  # For rollback capability
     created_at = Column(DateTime, default=datetime.utcnow, nullable=False)
     completed_at = Column(DateTime, nullable=True)

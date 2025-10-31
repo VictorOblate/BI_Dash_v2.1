@@ -27,8 +27,8 @@ def validate_file(filename: str, file_size: int) -> Tuple[bool, str]:
     # Check file extension
     file_ext = filename.rsplit('.', 1)[-1].lower() if '.' in filename else ''
     
-    if file_ext not in settings.ALLOWED_EXTENSIONS:
-        return False, f"Invalid file type. Allowed types: {', '.join(settings.ALLOWED_EXTENSIONS)}"
+    if file_ext not in settings.allowed_extensions:
+        return False, f"Invalid file type. Allowed types: {', '.join(settings.allowed_extensions)}"
     
     # Check file size
     if file_size > settings.MAX_UPLOAD_SIZE:
