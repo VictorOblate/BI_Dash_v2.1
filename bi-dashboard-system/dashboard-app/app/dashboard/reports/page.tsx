@@ -1,8 +1,7 @@
 // dashboard-app/app/dashboard/reports/page.tsx
 
-import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { authOptions } from '@/lib/auth';
+import { auth } from '@/lib/nextAuth';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Card, CardHeader, CardBody } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -18,7 +17,7 @@ import {
 } from 'lucide-react';
 
 export default async function ReportsPage() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect('/auth/signin');

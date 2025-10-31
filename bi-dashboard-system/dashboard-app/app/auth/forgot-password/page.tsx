@@ -44,10 +44,10 @@ export default function ForgotPasswordPage() {
             </div>
             <h2 className="text-2xl font-bold text-accent-900 mb-2">Check Your Email</h2>
             <p className="text-accent-600 mb-6">
-              We've sent a password reset link to <strong>{email}</strong>
+              We&apos;ve sent a password reset link to <strong>{email}</strong>
             </p>
             <p className="text-sm text-accent-500 mb-6">
-              The link will expire in 1 hour. If you don't see the email, check your spam folder.
+              The link will expire in 1 hour. If you don&apos;t see the email, check your spam folder.
             </p>
             <Link href="/auth/signin">
               <Button variant="outline" className="w-full">
@@ -110,7 +110,7 @@ export default function ForgotPasswordPage() {
         </div>
 
         {/* Footer text */}
-        <p className="text-center text-sm text-accent-500 mt-8">
+          <p className="text-center text-sm text-accent-500 mt-8">
           Remember your password?{' '}
           <Link href="/auth/signin" className="text-primary-600 hover:text-primary-700 font-medium">
             Sign in

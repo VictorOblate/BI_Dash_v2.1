@@ -10,7 +10,20 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Semantic tokens mapped to CSS variables used in globals.css
       colors: {
+        // CSS-var-based tokens used in globals.css
+        border: 'hsl(var(--border) / <alpha-value>)',
+        input: 'hsl(var(--input) / <alpha-value>)',
+        ring: 'hsl(var(--ring) / <alpha-value>)',
+        background: 'hsl(var(--background) / <alpha-value>)',
+        foreground: 'hsl(var(--foreground) / <alpha-value>)',
+        card: 'hsl(var(--card) / <alpha-value>)',
+        'card-foreground': 'hsl(var(--card-foreground) / <alpha-value>)',
+        popover: 'hsl(var(--popover) / <alpha-value>)',
+        'popover-foreground': 'hsl(var(--popover-foreground) / <alpha-value>)',
+
+        // Design system colors
         primary: {
           50: '#f0fdf4',
           100: '#dcfce7',

@@ -1,8 +1,7 @@
 // dashboard-app/app/dashboard/page.tsx
 
-import { getServerSession } from 'next-auth';
+import { auth } from '@/lib/nextAuth';
 import { redirect } from 'next/navigation';
-import { authOptions } from '@/lib/auth';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { Card, CardHeader, CardBody } from '@/components/ui/Card';
 import { 
@@ -16,7 +15,7 @@ import {
 import { prisma } from '@/lib/prisma';
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect('/auth/signin');
@@ -166,7 +165,7 @@ export default async function DashboardPage() {
             </CardHeader>
             <CardBody>
               <div className="grid grid-cols-2 gap-4">
-                
+                <a
                   href="/dashboard/data-models"
                   className="p-4 border-2 border-accent-200 rounded-xl hover:border-primary-500 hover:bg-primary-50 transition-all group"
                 >
@@ -174,7 +173,8 @@ export default async function DashboardPage() {
                   <p className="font-medium text-accent-900">Data Models</p>
                   <p className="text-xs text-accent-500">Manage schemas</p>
                 </a>
-                
+
+                <a
                   href="/dashboard/uploads"
                   className="p-4 border-2 border-accent-200 rounded-xl hover:border-primary-500 hover:bg-primary-50 transition-all group"
                 >
@@ -182,7 +182,8 @@ export default async function DashboardPage() {
                   <p className="font-medium text-accent-900">Upload Data</p>
                   <p className="text-xs text-accent-500">Import files</p>
                 </a>
-                
+
+                <a
                   href="/dashboard/analytics"
                   className="p-4 border-2 border-accent-200 rounded-xl hover:border-primary-500 hover:bg-primary-50 transition-all group"
                 >
@@ -190,7 +191,8 @@ export default async function DashboardPage() {
                   <p className="font-medium text-accent-900">Analytics</p>
                   <p className="text-xs text-accent-500">View insights</p>
                 </a>
-                
+
+                <a
                   href="/dashboard/users"
                   className="p-4 border-2 border-accent-200 rounded-xl hover:border-primary-500 hover:bg-primary-50 transition-all group"
                 >
